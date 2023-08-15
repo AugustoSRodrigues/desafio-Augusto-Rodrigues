@@ -1,4 +1,4 @@
-import { Item } from "./item";
+import {Item} from "./item";
 class Combo extends Item{
     constructor(nome,descricao,valor){
         super(nome,descricao,valor)
