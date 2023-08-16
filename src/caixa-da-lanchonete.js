@@ -24,7 +24,7 @@ class CaixaDaLanchonete {
     pedido_valido(pedido){
         // Verifica se o pedido é valido:
         // Verifica se há o item pedido no cardapio
-        return pedido.length==2  & this.cardapio.tem_item(pedido[0].trim().toLowerCase());
+        return pedido.length==2  & this.cardapio.tem_item(pedido[0].trim());
     }
 
     quantidade_valida(qtd){
@@ -32,10 +32,16 @@ class CaixaDaLanchonete {
         return !(isNaN(qtd)) & qtd >0;
     }
 
+    contem_principal(itens,nome){
+        //verifica se o item princiapal está no carrinho
+        //Verifica tanto se estiver escrito em maiusculo quanto minisculo
+        return itens.some(e => e.toLowerCase().includes(this.cardapio.get_extra_de(nome)))
+    }
+
     calcularValorDaCompra(metodoDePagamento, itens) {
 
         
-        let total = 0; // Total do valor da compra
+        let total = 0; // Valor total da compra
         let valor_item;
         let qtd_item;
         
@@ -49,7 +55,7 @@ class CaixaDaLanchonete {
         }
 
         for(var i=0;i<itens.length;i++){
-            let pedido = itens[i].split(","); //
+            let pedido = itens[i].split(","); // pedido no formato [item,quantidade]
             
             if (!this.pedido_valido(pedido)){
                 return "Item inválido!";
@@ -57,7 +63,7 @@ class CaixaDaLanchonete {
 
             if (this.cardapio.eh_extra(pedido[0])){
                 
-                if (!(itens.some(e =>e.includes(this.cardapio.get_extra_de(pedido[0]))))){
+                if (!(this.contem_principal(itens,pedido[0]))){ 
                     return "Item extra não pode ser pedido sem o principal";
                 }
             }

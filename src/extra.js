@@ -1,10 +1,10 @@
-// Sub classe que representa os extras dos item do cardapio
+// Sub classe de Item que representa os extras dos item do cardapio
 
 import { Item } from "./item";
 class Extra extends Item{
     constructor(nome,descricao,valor,extra_de){
         super(nome,descricao,valor);
-        this.extra_de = extra_de // De qual item é extra
+        this.extra_de = extra_de.toLowerCase(); // De qual item e extra
     }
 
     get_extra_de(){
