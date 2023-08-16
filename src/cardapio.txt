@@ -1,8 +1,0 @@
-cafe	Café	R$ 3,00 item
-chantily	Chantily (extra do Café)	R$ 1,50 extra
-suco	Suco Natural	R$ 6,20 intem
-sanduiche	Sanduíche	R$ 6,50 item
-queijo	Queijo (extra do Sanduíche)	R$ 2,00 extra
-salgado	Salgado	R$ 7,25 item
-combo1	1 Suco e 1 Sanduíche	R$ 9,50 combo
-combo2	1 Café e 1 Sanduíche	R$ 7,50 combo

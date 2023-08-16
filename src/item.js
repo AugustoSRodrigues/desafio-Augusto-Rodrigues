@@ -1,8 +1,11 @@
+// Classe que representa os itens do cardapio
+
+
 class Item{
     constructor(nome,descricao,valor){
         this.nome = nome;
         this.descricao = descricao;
-        this.valor = valor;
+        this.valor = valor; 
     }
 
     get_nome(){

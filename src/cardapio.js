@@ -1,6 +1,8 @@
 import {Item} from "./item.js"
 import {Combo} from "./combo.js"
 import {Extra} from "./extra.js"
+
+// Classe que reprsenta o cardapio
 class Cardapio{
     constructor(){
         
@@ -16,24 +18,24 @@ class Cardapio{
     }
 
     get_valor(nome){
-        return this.items[nome].get_valor();
+        return this.items[nome.toLowerCase()].get_valor();
     }
 
     get_item(nome){
-        return this.items[nome]
+        return this.items[nome.toLowerCase()]
     }
 
     tem_item(nome){
-        return nome in this.items ;
+        return nome.toLowerCase() in this.items ;
     }
 
     eh_extra(nome){
-        return this.items[nome] instanceof Extra ;
+        return this.items[nome.toLowerCase()] instanceof Extra ;
     }
 
     get_extra_de(nome){
         try{
-            return this.items[nome].get_extra_de();
+            return this.items[nome.toLowerCase()].get_extra_de();
         }
         catch(err){
             console.log(err)

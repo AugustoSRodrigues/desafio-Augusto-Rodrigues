@@ -2,6 +2,8 @@ import { Cardapio } from "./cardapio";
 class CaixaDaLanchonete {
 
     constructor(){
+        // Object que armazena as formas aceitas de pagamneto 
+        //e seus respectivos modificadores (desconto/acrescimo) do valor da compra
         this.pagamentos_aceitos = {
             "dinheiro": 0.95,
             "credito" : 1.03,
@@ -11,24 +13,29 @@ class CaixaDaLanchonete {
         this.cardapio = new Cardapio();
     }
     carrinho_vazio(itens){
+        // Verifica se o carrinho(itens) está vazio
         return itens.length <=0
     }
     pagamento_valido(metodoDePagamento){
-        return Object.keys(this.pagamentos_aceitos).includes(metodoDePagamento)
+        // Verifica se a forma de pagamento é valida
+        return Object.keys(this.pagamentos_aceitos).includes(metodoDePagamento.toLowerCase())
     }
 
     pedido_valido(pedido){
+        // Verifica se o pedido é valido:
+        // Verifica se há o item pedido no cardapio
         return pedido.length==2  & this.cardapio.tem_item(pedido[0].trim().toLowerCase());
     }
 
     quantidade_valida(qtd){
-
+        //Verifica se a quantidade pedida de um item é valida
+        return !(isNaN(qtd)) & qtd >0;
     }
 
     calcularValorDaCompra(metodoDePagamento, itens) {
 
         
-        let total = 0;
+        let total = 0; // Total do valor da compra
         let valor_item;
         let qtd_item;
         
@@ -41,27 +48,27 @@ class CaixaDaLanchonete {
             return "Forma de pagamento inválida!";
         }
 
-        for(var i =0;i<itens.length;i++){
-            var aux = itens[i].split(",");
+        for(var i=0;i<itens.length;i++){
+            let pedido = itens[i].split(","); //
             
-            if (!this.pedido_valido(aux)){
+            if (!this.pedido_valido(pedido)){
                 return "Item inválido!";
             }
 
-            if (this.cardapio.eh_extra(aux[0])){
+            if (this.cardapio.eh_extra(pedido[0])){
                 
-                if (!(itens.some(e =>e.includes(this.cardapio.get_item(aux[0]).get_extra_de())))){
+                if (!(itens.some(e =>e.includes(this.cardapio.get_extra_de(pedido[0]))))){
                     return "Item extra não pode ser pedido sem o principal";
                 }
             }
 
-            qtd_item = parseInt(aux[1],10)
-            if (isNaN(qtd_item) || qtd_item <=0){
+            qtd_item = parseInt(pedido[1],10)
+            if (!this.quantidade_valida(qtd_item)){
                 return "Quantidade inválida!";
             }
 
-            valor_item = parseFloat(this.cardapio.get_valor(aux[0]));
-            qtd_item = parseInt(aux[1],10)
+            valor_item = parseFloat(this.cardapio.get_valor(pedido[0]));
+            
 
             total+=(valor_item*qtd_item)
             
