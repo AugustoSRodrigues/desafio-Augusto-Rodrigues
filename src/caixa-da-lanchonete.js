@@ -17,13 +17,13 @@ class CaixaDaLanchonete {
         return itens.length <=0
     }
     pagamento_valido(metodoDePagamento){
-        // Verifica se a forma de pagamento é valida
+        // Verifica se a forma de pagamento e valida
         return Object.keys(this.pagamentos_aceitos).includes(metodoDePagamento.toLowerCase())
     }
 
     pedido_valido(pedido){
-        // Verifica se o pedido é valido:
-        // Verifica se há o item pedido no cardapio
+        // Verifica se o pedido e valido:
+        // Verifica se ha o item pedido no cardapio
         return pedido.length==2  & this.cardapio.tem_item(pedido[0].trim());
     }
 
@@ -33,8 +33,8 @@ class CaixaDaLanchonete {
     }
 
     contem_principal(itens,nome){
-        //verifica se o item princiapal está no carrinho
-        //Verifica tanto se estiver escrito em maiusculo quanto minisculo
+        //verifica se o item princiapal esta no carrinho
+        //Verifica tanto se estiver escrito em maiusculo quanto minusculo
         return itens.some(e => e.toLowerCase().includes(this.cardapio.get_extra_de(nome)))
     }
 
